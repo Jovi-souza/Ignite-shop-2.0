@@ -33,8 +33,13 @@ module.exports = {
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif'],
       },
+
       translate: {
         maxCover: '110%',
+      },
+
+      height: {
+        maxCover: '34rem',
       },
     },
   },

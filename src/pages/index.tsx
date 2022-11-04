@@ -18,9 +18,15 @@ export default function Home() {
       ref={sliderRef}
       className="flex w-full max-w-[calc(100vw-((100vw-1024px)/2))] ml-auto overflow-hidden"
     >
-      <div className="flex p-4 cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover keen-slider__slide">
-        <Image src={Camisa1} alt="" className="object-cover" />
-        <footer className="absolute bottom-1 left-1 right-0 p-8 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
+      <div className="flex flex-col p-6 h-maxCover cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover rounded-md keen-slider__slide">
+        <Image
+          src={Camisa1}
+          alt=""
+          className="object-cover"
+          width={520}
+          height={480}
+        />
+        <footer className="absolute bottom-1 left-1 right-1 p-4 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
           <div className="text-xl flex flex-col">
             <strong className="text-gray-100">Camiseta rocketseat</strong>
             <span className="font-bold text-greenLight">R$ 79.99</span>
@@ -30,9 +36,16 @@ export default function Home() {
           </div>
         </footer>
       </div>
-      <div className="flex p-4 cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover keen-slider__slide">
-        <Image src={Camisa1} alt="" className="object-cover" />
-        <footer className="absolute bottom-1 left-1 right-0 p-8 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
+
+      <div className="flex flex-col p-6 h-maxCover cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover rounded-md keen-slider__slide">
+        <Image
+          src={Camisa1}
+          alt=""
+          className="object-cover"
+          width={520}
+          height={480}
+        />
+        <footer className="absolute bottom-1 left-1 right-1 p-4 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
           <div className="text-xl flex flex-col">
             <strong className="text-gray-100">Camiseta rocketseat</strong>
             <span className="font-bold text-greenLight">R$ 79.99</span>
@@ -42,9 +55,16 @@ export default function Home() {
           </div>
         </footer>
       </div>
-      <div className="flex p-4 cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover keen-slider__slide">
-        <Image src={Camisa1} alt="" className="object-cover" />
-        <footer className="absolute bottom-1 left-1 right-0 p-8 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
+
+      <div className="flex flex-col p-6 h-maxCover cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover rounded-md keen-slider__slide">
+        <Image
+          src={Camisa1}
+          alt=""
+          className="object-cover"
+          width={520}
+          height={480}
+        />
+        <footer className="absolute bottom-1 left-1 right-1 p-4 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
           <div className="text-xl flex flex-col">
             <strong className="text-gray-100">Camiseta rocketseat</strong>
             <span className="font-bold text-greenLight">R$ 79.99</span>
@@ -54,9 +74,16 @@ export default function Home() {
           </div>
         </footer>
       </div>
-      <div className="flex p-4 cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover keen-slider__slide">
-        <Image src={Camisa1} alt="" className="object-cover" />
-        <footer className="absolute bottom-1 left-1 right-0 p-8 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
+
+      <div className="flex flex-col p-6 h-maxCover cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover rounded-md keen-slider__slide">
+        <Image
+          src={Camisa1}
+          alt=""
+          className="object-cover"
+          width={520}
+          height={480}
+        />
+        <footer className="absolute bottom-1 left-1 right-1 p-4 rounded-lg flex items-center justify-between  bg-gray-800 translate-y-maxCover group-hover/hover:translate-y-0 ease-in-out duration-300">
           <div className="text-xl flex flex-col">
             <strong className="text-gray-100">Camiseta rocketseat</strong>
             <span className="font-bold text-greenLight">R$ 79.99</span>
