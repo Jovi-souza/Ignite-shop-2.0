@@ -19,6 +19,7 @@ module.exports = {
 
         greenDark: '#00875f',
         greenLight: '#00b37e',
+
         bgGradient1: '#1ea483',
         bgGradient2: '#7465d4',
       },

@@ -5,18 +5,38 @@ import Logo from '../assets/Logo.svg'
 import type { AppProps } from 'next/app'
 import Image from 'next/image'
 import camisa1 from '../assets/1.png'
+import { useState } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [toggle, setToggle] = useState('translate-x-maxCover')
+
+  const handleToggleMenu = () => {
+    setToggle(
+      toggle === 'translate-x-maxCover'
+        ? 'translate-x-0'
+        : 'translate-x-maxCover',
+    )
+  }
+
   return (
-    <div className="flex flex-col items-start justify-center relative">
+    <div className="flex flex-col items-start justify-center relative h-screen overflow-hidden">
       <header className="flex justify-between items-center w-full max-w-5xl mx-auto py-8">
         <Image src={Logo} width={120} alt="Logo" />
-        <div className="bg-elements p-2 rounded-md">
+        <div
+          className="bg-elements p-2 rounded-md cursor-pointer hover:bg-gray-600"
+          onClick={handleToggleMenu}
+        >
           <Handbag size={24} weight="bold" className="text-icon" />
         </div>
       </header>
-      <aside className="absolute top-0 right-0 bg-elements z-10 p-8 w-96 h-full flex flex-col gap-4">
-        <X className="ml-auto cursor-pointer" size={20} />
+      <aside
+        className={`${toggle} flex absolute top-0 right-0 bg-elements z-10 p-8 w-96 h-screen flex-col gap-4 duration-300`}
+      >
+        <X
+          className="ml-auto cursor-pointer"
+          size={20}
+          onClick={handleToggleMenu}
+        />
         <h1 className="text-gray-100 mb-4 font-bold text-xl">
           Sacola de compras
         </h1>
