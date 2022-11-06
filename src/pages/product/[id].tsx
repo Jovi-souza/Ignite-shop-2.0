@@ -1,18 +1,38 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
-import Camisa from '../../assets/1.png'
-export default function Product() {
+import Stripe from 'stripe'
+import { stripe } from '../../lib/stripe'
+
+interface ProductProps {
+  product: {
+    id: string
+    name: string
+    imageUrl: string
+    price: string
+    description: string
+    defaultPriceId: string
+  }
+}
+
+export default function Product({ product }: ProductProps) {
   return (
     <div className="grid grid-cols-2 items-stretch gap-16 mx-auto max-w-5xl">
       <div className="w-full max-w-xl rounded-lg p-1 flex items-center justify-center bg-gradient-to-t from-bgGradient1 to-bgGradient2">
-        <Image src={Camisa} alt="" className="object-cover" />
+        <Image
+          src={product.imageUrl}
+          alt=""
+          className="object-cover"
+          width={520}
+          height={480}
+        />
       </div>
       <div className="flex flex-col">
-        <h1 className="text-3xl text-text">Camisa ignite</h1>
-        <span className="mt-4 block text-3xl text-greenLight">R$ 79,90</span>
+        <h1 className="text-3xl text-text">{product.name}</h1>
+        <span className="mt-4 block text-3xl text-greenLight">
+          {product.price}
+        </span>
         <p className="mt-10 text-base leading-relaxed text-text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex cumque
-          obcaecati ratione rerum illo facilis, minima voluptatem nulla,
-          explicabo sunt voluptate voluptates
+          {product.description}
         </p>
         <button className="mt-auto bg-greenDark border-0 text-title cursor-pointer rounded-lg font-bold text-sm p-4 disabled:opacity-5 disabled:cursor-not-allowed [&:not(:disabled)]:hover:bg-greenLight">
           Comprar agora
@@ -20,4 +40,40 @@ export default function Product() {
       </div>
     </div>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{ params: { id: 'prod_Mioed7apxzK7J1' } }],
+    fallback: true,
+  }
+}
+
+export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
+  params,
+}) => {
+  const productId = params?.id
+
+  const product = await stripe.products.retrieve(productId!, {
+    expand: ['default_price'],
+  })
+
+  const price = product.default_price as Stripe.Price
+
+  return {
+    props: {
+      product: {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.images[0],
+        price: new Intl.NumberFormat('pt-br', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(price.unit_amount! / 100),
+        description: product.description,
+        defaultPriceId: price.id,
+      },
+    },
+    revalidate: 60 * 60 * 1,
+  }
 }
