@@ -40,7 +40,7 @@ module.exports = {
       },
 
       height: {
-        maxCover: '34rem',
+        maxCover: '32rem',
       },
     },
   },

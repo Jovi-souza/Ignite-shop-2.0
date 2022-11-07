@@ -1,6 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
+import { useContext } from 'react'
 import Stripe from 'stripe'
+import { ShoppingCartContext } from '../../context/products'
 import { stripe } from '../../lib/stripe'
 
 interface ProductProps {
@@ -15,15 +17,26 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const { addItemInCart } = useContext(ShoppingCartContext)
+
+  function handleAddItemInCart() {
+    addItemInCart({
+      id: product.id,
+      imageUrl: product.imageUrl,
+      name: product.name,
+      price: product.price,
+    })
+  }
+
   return (
-    <div className="grid grid-cols-2 items-stretch gap-16 mx-auto max-w-5xl">
+    <div className="grid grid-cols-2 items-stretch gap-16 mx-auto max-w-5xl h-maxCover">
       <div className="w-full max-w-xl rounded-lg p-1 flex items-center justify-center bg-gradient-to-t from-bgGradient1 to-bgGradient2">
         <Image
           src={product.imageUrl}
           alt=""
           className="object-cover"
-          width={520}
-          height={480}
+          width={390}
+          height={350}
         />
       </div>
       <div className="flex flex-col">
@@ -34,8 +47,11 @@ export default function Product({ product }: ProductProps) {
         <p className="mt-10 text-base leading-relaxed text-text">
           {product.description}
         </p>
-        <button className="mt-auto bg-greenDark border-0 text-title cursor-pointer rounded-lg font-bold text-sm p-4 disabled:opacity-5 disabled:cursor-not-allowed [&:not(:disabled)]:hover:bg-greenLight">
-          Comprar agora
+        <button
+          className="mt-auto bg-greenDark border-0 text-title cursor-pointer rounded-lg font-bold text-sm p-4 disabled:opacity-5 disabled:cursor-not-allowed [&:not(:disabled)]:hover:bg-greenLight"
+          onClick={handleAddItemInCart}
+        >
+          Colocar na sacola
         </button>
       </div>
     </div>
