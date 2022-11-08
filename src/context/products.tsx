@@ -9,7 +9,8 @@ interface Product {
 
 interface ProductsCartProps {
   shoppingCart: Product[]
-  addItemInCart: (data: Product) => void
+  addItemToCart: (data: Product) => void
+  RemoveItemFromCart: (id: string) => void
 }
 
 interface ChildrenProps {
@@ -21,22 +22,31 @@ export const ShoppingCartContext = createContext({} as ProductsCartProps)
 export function ProductsContext({ children }: ChildrenProps) {
   const [shoppingCart, setShoppingCart] = useState<Product[]>([])
 
-  function addItemInCart(data: Product) {
-    const newRequest = {
-      id: data.id,
-      imageUrl: data.imageUrl,
-      name: data.name,
-      price: data.price,
+  function addItemToCart(data: Product) {
+    const havethisItemInCart = shoppingCart.find((item) => item.id === data.id)
+
+    if (havethisItemInCart) {
+      alert('Este item já existe em seu carrinho')
     }
 
-    setShoppingCart((state) => [...state, newRequest])
-    console.log('data', data)
+    if (!havethisItemInCart) {
+      setShoppingCart((state) => [...state, data])
+    }
   }
 
-  console.log('cart', shoppingCart)
+  function RemoveItemFromCart(id: string) {
+    const itemToRemove = shoppingCart.filter((item) => item.id !== id)
+    setShoppingCart(itemToRemove)
+  }
 
   return (
-    <ShoppingCartContext.Provider value={{ shoppingCart, addItemInCart }}>
+    <ShoppingCartContext.Provider
+      value={{
+        shoppingCart,
+        addItemToCart,
+        RemoveItemFromCart,
+      }}
+    >
       {children}
     </ShoppingCartContext.Provider>
   )

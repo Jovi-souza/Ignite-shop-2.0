@@ -17,10 +17,10 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const { addItemInCart } = useContext(ShoppingCartContext)
+  const { addItemToCart } = useContext(ShoppingCartContext)
 
   function handleAddItemInCart() {
-    addItemInCart({
+    addItemToCart({
       id: product.id,
       imageUrl: product.imageUrl,
       name: product.name,

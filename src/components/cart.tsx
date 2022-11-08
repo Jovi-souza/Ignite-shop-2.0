@@ -6,8 +6,7 @@ import { ShoppingCartContext } from '../context/products'
 
 export function Cart() {
   const [toggle, setToggle] = useState('translate-x-maxCover')
-  const { shoppingCart } = useContext(ShoppingCartContext)
-  console.log('teste', shoppingCart)
+  const { shoppingCart, RemoveItemFromCart } = useContext(ShoppingCartContext)
 
   const handleToggleMenu = () => {
     setToggle(
@@ -16,6 +15,12 @@ export function Cart() {
         : 'translate-x-maxCover',
     )
   }
+
+  const handleRemoveItemFromCart = (e: any) => {
+    RemoveItemFromCart(e.target.id)
+  }
+
+  const itemsinCart = shoppingCart.length
 
   return (
     <div className="bg-elements p-2 rounded-md hover:bg-gray-600">
@@ -37,10 +42,16 @@ export function Cart() {
                 <div className="bg-gradient-to-t from-bgGradient1 to-bgGradient2 rounded-md h-max">
                   <Image src={item.imageUrl} width={100} height={120} alt="" />
                 </div>
-                <div className="flex flex-col gap-2">
-                  <span className="text-title">{item.name}</span>
+                <div className="flex flex-col gap-2 overflow-hidden">
+                  <span className="text-title overflow-hidden w-max">
+                    {item.name}
+                  </span>
                   <strong className="text-lg">{item.price}</strong>
-                  <button className="flex justify-start text-greenLight">
+                  <button
+                    className="flex justify-start text-greenLight"
+                    onClick={handleRemoveItemFromCart}
+                    id={item.id}
+                  >
                     Remover
                   </button>
                 </div>
@@ -48,24 +59,37 @@ export function Cart() {
             </div>
           )
         })}
-        <div className="mt-auto">
+        <div className="flex flex-col gap-2 mt-auto">
           <p className="flex justify-between">
-            Quantidade <span>3 itens</span>
+            Quantidade <span>{itemsinCart} itens</span>
           </p>
           <p className="flex justify-between">
-            Valor Total <strong> R$ 270,00</strong>
+            Valor Total <strong>R$</strong>
           </p>
-          <button className="bg-greenDark w-full p-2 rounded-md">
+          <button
+            className={`${
+              itemsinCart ? 'cursor-pointer' : 'cursor-not-allowed'
+            } bg-greenDark w-full p-2 rounded-md`}
+          >
             Finalizar compra
           </button>
         </div>
       </aside>
-      <Handbag
-        size={24}
-        weight="bold"
-        className="text-icon cursor-pointer"
-        onClick={handleToggleMenu}
-      />
+      <div className="relative">
+        <Handbag
+          size={24}
+          weight="bold"
+          className="text-icon cursor-pointer"
+          onClick={handleToggleMenu}
+        />
+        <span
+          className={`${
+            !itemsinCart ? 'hidden' : 'flex'
+          } absolute -top-7 -right-5 bg-greenLight px-2 py-1 h-max rounded-full text-cartItem border-4 border-backgroud`}
+        >
+          {itemsinCart}
+        </span>
+      </div>
     </div>
   )
 }

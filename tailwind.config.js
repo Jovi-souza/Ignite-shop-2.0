@@ -23,14 +23,13 @@ module.exports = {
         bgGradient1: '#1ea483',
         bgGradient2: '#7465d4',
       },
-
-      fontSizes: {
+      fontSize: {
+        cartItem: '.75rem',
         md: '1.125rem',
         lg: '1.25rem',
         xl: '1.5rem',
         '2xl': '2rem',
       },
-
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif'],
       },
