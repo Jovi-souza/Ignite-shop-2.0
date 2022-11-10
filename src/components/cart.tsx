@@ -37,6 +37,15 @@ export function Cart() {
     }
   }
 
+  const shop = shoppingCart.map((value) => {
+    const remove = value.price.replace('R$', '')
+    return parseFloat(remove)
+  })
+
+  const test = shop.reduce((pv, cv) => {
+    return pv + cv
+  }, 0)
+
   const itemsinCart = shoppingCart.length
   const isDisable = itemsinCart === 0
 
@@ -82,7 +91,7 @@ export function Cart() {
             Quantidade <span>{itemsinCart} itens</span>
           </p>
           <p className="flex justify-between">
-            Valor Total <strong>R$</strong>
+            Valor Total <strong>R$ {test}</strong>
           </p>
           <button
             className={`${
