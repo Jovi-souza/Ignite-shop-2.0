@@ -5,6 +5,7 @@ interface Product {
   name: string
   imageUrl: string
   price: string
+  defaultPriceId: string
 }
 
 interface ProductsCartProps {

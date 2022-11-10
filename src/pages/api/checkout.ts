@@ -1,17 +1,18 @@
-import { stripe } from '../lib/stripe'
-import { NextApiRequest, NextApiResponse } from 'next'
+/* eslint-disable camelcase */
+import { stripe } from './../../lib/stripe'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { priceId } = req.body
+  const { priceIds } = req.body
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  if (!priceId) {
+  if (!priceIds) {
     return res.status(400).json({ error: 'Price not found' })
   }
 
@@ -22,12 +23,12 @@ export default async function handler(
     success_url: successUrl,
     cancel_url: cancelUrl,
     mode: 'payment',
-    line_items: [
-      {
-        price: priceId,
+    line_items: priceIds.map((id: string) => {
+      return {
+        price: id,
         quantity: 1,
-      },
-    ],
+      }
+    }),
   })
 
   return res.status(201).json({

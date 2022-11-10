@@ -12,6 +12,7 @@ interface HomeProps {
     name: string
     imageUrl: string
     price: string
+    defaultPriceId: string
   }[]
 }
 
@@ -36,6 +37,7 @@ export default function Home({ products }: HomeProps) {
             name={product.name}
             imageUrl={product.imageUrl}
             price={product.price}
+            defaultPriceId={product.defaultPriceId}
           />
         )
       })}
@@ -59,6 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL',
       }).format(price.unit_amount! / 100),
+      defaultPriceId: price.id,
     }
   })
 

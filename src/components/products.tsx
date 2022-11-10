@@ -9,9 +9,16 @@ interface ProductsProps {
   name: string
   imageUrl: string
   price: string
+  defaultPriceId: string
 }
 
-export function Products({ id, imageUrl, name, price }: ProductsProps) {
+export function Products({
+  id,
+  imageUrl,
+  name,
+  price,
+  defaultPriceId,
+}: ProductsProps) {
   const { addItemToCart } = useContext(ShoppingCartContext)
 
   function handleAddItemInCart() {
@@ -20,6 +27,7 @@ export function Products({ id, imageUrl, name, price }: ProductsProps) {
       imageUrl,
       name,
       price,
+      defaultPriceId,
     })
   }
 

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useContext, useState } from 'react'
+import axios from 'axios'
 
 import { Handbag, X } from 'phosphor-react'
 import { ShoppingCartContext } from '../context/products'
@@ -16,11 +17,28 @@ export function Cart() {
     )
   }
 
-  const handleRemoveItemFromCart = (e: any) => {
-    RemoveItemFromCart(e.target.id)
+  const handleRemoveItemFromCart = (event: any) => {
+    RemoveItemFromCart(event.target.id)
+  }
+
+  async function handleBuyProducts() {
+    try {
+      const response = await axios.post('/api/checkout', {
+        priceIds: shoppingCart.map((item) => {
+          return item.defaultPriceId
+        }),
+      })
+
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (error) {
+      alert('Falha ao redirecionar ao checkout')
+    }
   }
 
   const itemsinCart = shoppingCart.length
+  const isDisable = itemsinCart === 0
 
   return (
     <div className="bg-elements p-2 rounded-md hover:bg-gray-600">
@@ -69,7 +87,9 @@ export function Cart() {
           <button
             className={`${
               itemsinCart ? 'cursor-pointer' : 'cursor-not-allowed'
-            } bg-greenDark w-full p-2 rounded-md`}
+            } bg-greenDark w-full p-2 rounded-md disabled:opacity-60`}
+            onClick={handleBuyProducts}
+            disabled={isDisable}
           >
             Finalizar compra
           </button>
