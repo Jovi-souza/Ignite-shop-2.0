@@ -37,12 +37,11 @@ export function Cart() {
     }
   }
 
-  const shop = shoppingCart.map((value) => {
-    const remove = value.price.replace('R$', '')
-    return parseFloat(remove)
+  const converter = shoppingCart.map((value) => {
+    return parseFloat(value.price.replace('R$', ''))
   })
 
-  const test = shop.reduce((pv, cv) => {
+  const TotalValue = converter.reduce((pv, cv) => {
     return pv + cv
   }, 0)
 
@@ -91,7 +90,7 @@ export function Cart() {
             Quantidade <span>{itemsinCart} itens</span>
           </p>
           <p className="flex justify-between">
-            Valor Total <strong>R$ {test}</strong>
+            Valor Total <strong>{TotalValue}</strong>
           </p>
           <button
             className={`${
