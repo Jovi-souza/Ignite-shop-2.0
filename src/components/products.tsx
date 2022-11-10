@@ -32,7 +32,7 @@ export function Products({
   }
 
   return (
-    <div className="flex flex-col p-6 h-maxCover cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover rounded-md keen-slider__slide">
+    <div className="flex flex-col p-2 h-maxCover cursor-pointer relative items-center justify-center overflow-hidden bg-gradient-to-t from-bgGradient1 to-bgGradient2 group/hover rounded-md keen-slider__slide">
       <Link href={`/product/${id}`}>
         <Image
           src={imageUrl}

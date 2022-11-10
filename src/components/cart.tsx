@@ -41,7 +41,7 @@ export function Cart() {
   const isDisable = itemsinCart === 0
 
   return (
-    <div className="bg-elements p-2 rounded-md hover:bg-gray-600">
+    <div>
       <aside
         className={`${toggle} flex absolute top-0 right-0 bg-elements z-10 p-8 w-96 h-screen flex-col gap-4 duration-300`}
       >
@@ -95,13 +95,11 @@ export function Cart() {
           </button>
         </div>
       </aside>
-      <div className="relative">
-        <Handbag
-          size={24}
-          weight="bold"
-          className="text-icon cursor-pointer"
-          onClick={handleToggleMenu}
-        />
+      <div
+        className="relative p-2 bg-elements rounded-md hover:bg-gray-600 cursor-pointer"
+        onClick={handleToggleMenu}
+      >
+        <Handbag size={24} weight="bold" className="text-icon" />
         <span
           className={`${
             !itemsinCart ? 'hidden' : 'flex'
